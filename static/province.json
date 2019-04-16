@@ -1,0 +1,132 @@
+[
+    {
+        "value": "Beijing",
+        "label": "北京",
+        "children":[
+            {
+                "value": "dongcheng",
+                "label": "东城区"
+            },
+            {
+                "value": "xicheng",
+                "label": "西城区"
+            },
+            {
+                "value": "chongwen",
+                "label": "崇文区"
+            },
+            {
+                "value": "xuanwu",
+                "label": "宣武区"
+            },
+            {
+                "value": "chaoyang",
+                "label": "朝阳区"
+            },
+            {
+                "value": "haiding",
+                "label": "海淀区"
+            },
+            {
+                "value": "fenggu",
+                "label": "丰台区"
+            },
+            {
+                "value": "shijingyan",
+                "label": "石景山区"
+            },
+            {
+                "value": "fangshan",
+                "label": "房山区"
+            }
+        ]
+    },
+    {
+        "value": "Shanghai",
+        "label": "上海",
+        "children":[
+            {
+                "value": "huangpu",
+                "label": "黄浦区"
+            },
+            {
+                "value": "luwan",
+                "label": "卢湾区"
+            },
+            {
+                "value": "xuhui",
+                "label": "徐汇区"
+            },
+            {
+                "value": "changning",
+                "label": "长宁区"
+            },
+            {
+                "value": "jingan",
+                "label": "静安区"
+            },
+            {
+                "value": "pituo",
+                "label": "普陀区"
+            },
+            {
+                "value": "xiabei",
+                "label": "闸北区"
+            },
+            {
+                "value": "hongkou",
+                "label": "虹口区"
+            },
+            {
+                "value": "yangpu",
+                "label": "杨浦区"
+            }
+        ]
+    },
+    {
+        "value": "JiangSu",
+        "label": "江苏",
+        "children":[
+            {
+                "value": "nanjing",
+                "label": "南京"
+            },
+            {
+                "value": "suzhou",
+                "label": "苏州"
+            },
+            {
+                "value": "wuxi",
+                "label": "无锡"
+            },
+            {
+                "value": "changzhou",
+                "label": "常州"
+            },
+            {
+                "value": "zhenjiang",
+                "label": "镇江"
+            },
+            {
+                "value": "nantong",
+                "label": "南通"
+            },
+            {
+                "value": "taihzou",
+                "label": "泰州"
+            },
+            {
+                "value": "yangzhou",
+                "label": "扬州"
+            },
+            {
+                "value": "yancheng",
+                "label": "盐城"
+            },
+            {
+                "value": "lianyungang",
+                "label": "连云港"
+            }
+        ]
+    }
+]

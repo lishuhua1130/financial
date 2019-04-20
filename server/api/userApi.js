@@ -132,10 +132,8 @@ router.post('/updateUserDate', (req, res) => {
 router.post('/addArticle', (req, res) => {
     var sql = $sql.article.add;
     var params = req.body;
-    console.log("用户增加文章", params);
+    console.log("用户增加文章");
     let fileUrl = '../server/public/article/' + params.title + '.txt';
-    console.log(fileUrl);
-    console.log(params.content);
     fs.writeFile(fileUrl, params.content,function(error){
         if(error){
             console.log('写入失败',error)
@@ -152,6 +150,49 @@ router.post('/addArticle', (req, res) => {
             })
         }
     });
-
+});
+router.post('/getAlls', (req, res) => {
+    var sql = $sql.article.getAlls;
+    var params = req.body;
+    console.log("用户增加文章");
+    conn.query(sql, [params.uid], function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    })
+});
+router.post('/get', (req, res) => {
+    var sql = $sql.article.get;
+    var params = req.body;
+    console.log("用户获取文章");
+    conn.query(sql, [params.uid,params.articleID], function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    })
+});
+router.post('/delete', (req, res) => {
+    var sql = $sql.article.get;
+    var params = req.body;
+    console.log("用户删除文章");
+    conn.query(sql, [params.uid,params.articleID], function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    })
+});
+router.post('/update', (req, res) => {
+    var sql = $sql.article.get;
+    var params = req.body;
+    console.log("用户更新文章，具体再实现", params);
 });
 module.exports = router;

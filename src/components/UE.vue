@@ -29,6 +29,9 @@
     methods: {
       getUEContent() { // 获取内容方法
         return this.editor.getContent()
+      },
+      setUEContent(value){
+        return this.editor.setContent(value);
       }
     },
     destroyed() {

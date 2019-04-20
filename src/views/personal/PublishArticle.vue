@@ -1,7 +1,7 @@
 <template>
   <div class="personMain">
     <header class="personHeader">文章发布</header>
-    <el-input placeholder="标题(1-32字)" v-model="articleTitle"></el-input>
+    <el-input placeholder="标题(1-32字)" v-model="articleTitle" required></el-input>
     <UE :defaultMsg="defaultMsg" :config="config" ref="ue"></UE>
     <div class="bottomContainer">
       <div>
@@ -34,11 +34,28 @@
       <el-button>存入草稿箱</el-button>
       <el-button>取消</el-button>
     </div>
+    <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
+      <span>
+        <i class="el-icon-success"></i>发布成功
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="writeAgain">再写一篇</el-button>
+        <el-button type="primary" @click="centerDialogVisible = false">查看文章</el-button>
+      </span>
+    </el-dialog>
+    <el-alert
+      title="文章信息填写错误"
+      type="error"
+      description="标题，内容，封面，类型不能为空"
+      v-show="articleError"
+      show-icon
+      @click="closeErrorAlert"
+    ></el-alert>
   </div>
 </template>
 <script>
 import UE from "../../components/UE.vue";
-import { constants } from 'fs';
+import { constants } from "fs";
 export default {
   name: "publishArticle",
   components: {
@@ -52,8 +69,7 @@ export default {
       },
       // -- 文章标题
       articleTitle: "",
-      // -- 文章内容
-      defaultMsg: "这里是UE测试",
+      defaultMsg: "",
       // -- 文章封面图
       coverImgUrl: "",
       // -- 文章类型
@@ -73,14 +89,35 @@ export default {
           value: "个人生活",
           label: "个人生活"
         }
-      ]
+      ],
+      centerDialogVisible: false,
+      articleError: false
     };
   },
   methods: {
     getUEContent() {
+      console.log(
+        "添加文章啊",
+        this.articleTitle,
+        this.artcileContent,
+        this.coverImgUrl,
+        this.articleType
+      );
       this.artcileContent = this.$refs.ue.getUEContent();
+      if (
+        this.articleTitle == "" ||
+        this.artcileContent == "" ||
+        this.coverImgUrl == "" ||
+        this.articleType == ""
+      ) {
+        this.articleError = true;
+        console.log("显示弹出框", this.articleError);
+        return;
+      } else {
+        console.log("不显示弹出框");
+      }
       let obj = {
-        uid:this.$store.state.uid,
+        uid: this.$store.state.uid,
         title: this.articleTitle,
         content: this.artcileContent,
         coverImgUrl: this.coverImgUrl,
@@ -91,7 +128,8 @@ export default {
         .post("/api/user/addArticle", obj) //添加数据
         .then(response => {
           // 处理返回结果
-          console.log(response);
+          console.log("文章发布成", response);
+          this.centerDialogVisible = true;
         });
       console.log(this.artcileContent);
     },
@@ -109,6 +147,18 @@ export default {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
       return isJPG && isLt2M;
+    },
+    writeAgain() {
+      this.centerDialogVisible = false;
+      this.articleTitle = "";
+      this.coverImgUrl = "";
+      this.articleType = "";
+      this.artcileContent = "";
+      this.$refs.ue.setUEContent("");
+    },
+    closeErrorAlert() {
+      console.log("隐藏弹出框");
+      this.articleError = false;
     }
   }
 };

@@ -16,6 +16,10 @@ var sqlMap = {
     },
     article: {
         add: 'insert into article(articleID , uid , title , content , coverImgUrl , type) values (0, ? , ?, ?, ? , ? )',
+        getAlls: 'SELECT * from article where uid = ?',
+        get: 'SELECT * from article where uid = ? and articleID = ?',
+        delete: 'delete from article where uid = ? and articleID = ?',
+        update: 'update article set title = ? ,content = ?,coverImgUrl = ?,type = ? where uid = ? and articleID = ?'
     }
 }
 
